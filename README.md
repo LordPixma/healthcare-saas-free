@@ -64,10 +64,3 @@ pip install -r requirements.txt
 pytest
 ```
 
-## Deployment
-
-Deployment to Cloudflare Workers is handled through GitHub Actions with the configuration found in `.github/workflows/deploy.yml`. The [`wrangler.toml`](./wrangler.toml) file defines the Cloudflare project settings.
-=======
-Free serverless SaaS healthcare management system
-
-
