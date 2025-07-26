@@ -1,0 +1,35 @@
+service: audit-management
+provider:
+  name: aws
+  runtime: nodejs18.x
+functions:
+  createForm:
+    handler: src/createForm.handler
+    events:
+      - http:
+          path: audit/forms
+          method: post
+  editForm:
+    handler: src/editForm.handler
+    events:
+      - http:
+          path: audit/forms/{id}
+          method: put
+  scheduleAudit:
+    handler: src/scheduleAudit.handler
+    events:
+      - http:
+          path: audit/schedule
+          method: post
+  submitResults:
+    handler: src/submitResults.handler
+    events:
+      - http:
+          path: audit/results
+          method: post
+  syncOfflineResults:
+    handler: src/syncOfflineResults.handler
+    events:
+      - http:
+          path: audit/sync
+          method: post
