@@ -1,0 +1,9 @@
+name = "healthcare-saas-free"
+main = "worker/index.js"
+compatibility_date = "2023-12-01"
+
+[build]
+command = "echo Building placeholder"
+
+[vars]
+PYTHON_VERSION = "3.x"
