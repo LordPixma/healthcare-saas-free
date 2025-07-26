@@ -1,0 +1,23 @@
+[
+  {
+    "riskId": "ad331f2a-369f-4496-8e6a-b27d96e65eee",
+    "description": "New risk",
+    "likelihood": 2,
+    "impact": 3,
+    "status": "open"
+  },
+  {
+    "riskId": "0829a99d-b1d9-4cc4-bc3a-5224dc40db34",
+    "description": "Risk",
+    "likelihood": 1,
+    "impact": 1,
+    "status": "closed"
+  },
+  {
+    "riskId": "7bcc7c86-48a3-4106-80c1-fd2cb4aec11a",
+    "description": "Another",
+    "likelihood": 1,
+    "impact": 1,
+    "status": "open"
+  }
+]
