@@ -21,13 +21,17 @@ const IncidentList: React.FC = () => {
     <div>
       <h2>Incidents</h2>
       <Link to="/incidents/new">Create New Incident</Link>
-      <ul>
-        {incidents.map(inc => (
-          <li key={inc.id}>
-            <Link to={`/incidents/${inc.id}`}>{inc.title}</Link>
-          </li>
-        ))}
-      </ul>
+      {incidents.length === 0 ? (
+        <p>No incidents found.</p>
+      ) : (
+        <ul>
+          {incidents.map(inc => (
+            <li key={inc.id}>
+              <Link to={`/incidents/${inc.id}`}>{inc.title}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
