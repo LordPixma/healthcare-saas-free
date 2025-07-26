@@ -1,7 +1,12 @@
 # healthcare-saas-free
 
-
 Free serverless SaaS replicating Radar Healthcare's core modules (incident management, risk register, audit).
+
+## Modules
+
+- **incident_management** – handle incident recording and tracking
+- **risk_register** – manage organizational risks and mitigation actions
+- **audit_management** – track audit schedules and findings
 
 ## Audit Module
 
@@ -14,7 +19,7 @@ The `audit` folder contains a lightweight serverless module with endpoints for:
 * `POST /audit/sync` - sync offline results when back online.
 
 All data is stored locally in JSON files under `audit/data` for simplicity. Unit tests can be run with `npm test`.
-=======
+
 ## Risk Register Module
 
 This repository includes a simple risk register implemented with serverless functions. Each risk contains:
@@ -44,23 +49,28 @@ Unit tests can be run with:
 ```bash
 npm test
 ```
-=======
-This project provides a simplified serverless SaaS platform replicating Radar Healthcare's core modules. The codebase is organized as Python packages suitable for deployment to Cloudflare Workers.
-
-## Modules
-
-- **incident_management** – handle incident recording and tracking
-- **risk_register** – manage organizational risks and mitigation actions
-- **audit_management** – track audit schedules and findings
-
-Each module currently includes a placeholder implementation so the structure can be expanded easily.
 
 ## Development
+
+The project uses [Cloudflare Workers](https://workers.cloudflare.com/) for serverless functions. Source code lives in `src/` and tests reside in `tests/`.
 
 Install dependencies and run tests:
 
 ```bash
-pip install -r requirements.txt
-pytest
+npm install
+npm test
 ```
 
+## Continuous Integration
+
+GitHub Actions handle CI/CD with two workflows:
+
+- **CI** – installs dependencies and runs unit tests on every push and pull request.
+- **Deploy** – publishes the worker to Cloudflare when changes are pushed to the `main` branch.
+
+To enable deployments, configure the following repository secrets:
+
+- `CLOUDFLARE_API_TOKEN` – API token with permission to publish workers.
+- `CLOUDFLARE_ACCOUNT_ID` – your Cloudflare account ID.
+
+Once the secrets are added, pushing to `main` will automatically run tests and deploy the worker.
