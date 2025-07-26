@@ -1,0 +1,5 @@
+name = "healthcare-saas-free"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# account_id will be supplied via environment variables or wrangler config
