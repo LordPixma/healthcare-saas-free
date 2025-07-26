@@ -1,22 +1,17 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import RiskRegister from './pages/RiskRegister';
-import AuditForm from './pages/AuditForm';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import IncidentsPage from './pages/IncidentsPage';
+import IncidentFormPage from './pages/IncidentFormPage';
 
-const App: React.FC = () => {
-  return (
-    <div>
-      <nav>
-        <Link to="/risks">Risk Register</Link>
-        {' | '}
-        <Link to="/audits">Audits</Link>
-      </nav>
-      <Routes>
-        <Route path="/risks" element={<RiskRegister />} />
-        <Route path="/audits" element={<AuditForm />} />
-      </Routes>
-    </div>
-  );
-};
+const App: React.FC = () => (
+  <Router>
+    <Routes>
+      <Route path="/incidents" element={<IncidentsPage />} />
+      <Route path="/incidents/new" element={<IncidentFormPage />} />
+      <Route path="/incidents/:id" element={<IncidentFormPage />} />
+      <Route path="*" element={<IncidentsPage />} />
+    </Routes>
+  </Router>
+);
 
 export default App;
