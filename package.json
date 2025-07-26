@@ -1,0 +1,13 @@
+{
+  "name": "healthcare-saas-free",
+  "version": "1.0.0",
+  "description": "Free serverless SaaS replicating Radar Healthcare's core modules (incident management, risk register, audit).",
+  "main": "index.js",
+  "scripts": {
+    "test": "node audit/test/run-tests.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
