@@ -1,5 +1,5 @@
 
-name: Deploy
+name: Deploy to Cloudflare
 
 
 on:
@@ -14,8 +14,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - run: npm install -g wrangler@3.15.0
-      - run: wrangler publish
+      - name: Install Wrangler
+        run: npm install -g wrangler@3.15.0
+      - name: Publish
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: wrangler publish
