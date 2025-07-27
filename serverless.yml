@@ -22,3 +22,9 @@ functions:
       - http:
           path: risks/{riskId}
           method: get
+  listRisks:
+    handler: handlers/listRisks.listRisks
+    events:
+      - http:
+          path: risks
+          method: get

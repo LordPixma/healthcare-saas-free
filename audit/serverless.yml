@@ -9,12 +9,24 @@ functions:
       - http:
           path: audit/forms
           method: post
+  listForms:
+    handler: src/listForms.handler
+    events:
+      - http:
+          path: audit/forms
+          method: get
   editForm:
     handler: src/editForm.handler
     events:
       - http:
           path: audit/forms/{id}
           method: put
+  getForm:
+    handler: src/getForm.handler
+    events:
+      - http:
+          path: audit/forms/{id}
+          method: get
   scheduleAudit:
     handler: src/scheduleAudit.handler
     events:
