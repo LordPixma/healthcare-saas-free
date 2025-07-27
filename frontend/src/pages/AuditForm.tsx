@@ -1,4 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  List,
+  ListItem,
+  Stack,
+  Text,
+  Textarea,
+} from '@chakra-ui/react';
 
 interface Audit {
   id: string;
@@ -33,30 +46,30 @@ const AuditForm: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Audits</h1>
+    <Box>
+      <Heading mb={4}>Audits</Heading>
       <form onSubmit={handleSubmit}>
-        <input
-          value={name}
-          onChange={e => setName(e.target.value)}
-          placeholder="Audit Name"
-        />
-        <textarea
-          value={findings}
-          onChange={e => setFindings(e.target.value)}
-          placeholder="Findings"
-        />
-        <button type="submit">Add Audit</button>
+        <Stack spacing={4} maxW="600px">
+          <FormControl isRequired>
+            <FormLabel htmlFor="name">Audit Name</FormLabel>
+            <Input id="name" value={name} onChange={e => setName(e.target.value)} />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel htmlFor="findings">Findings</FormLabel>
+            <Textarea id="findings" value={findings} onChange={e => setFindings(e.target.value)} />
+          </FormControl>
+          <Button colorScheme="brand" type="submit">Add Audit</Button>
+        </Stack>
       </form>
-      <ul>
+      <List mt={8} spacing={4}>
         {audits.map(audit => (
-          <li key={audit.id}>
-            <strong>{audit.name}</strong>
-            <p>{audit.findings}</p>
-          </li>
+          <ListItem key={audit.id} borderWidth="1px" borderRadius="md" p={4}>
+            <Heading size="sm" mb={2}>{audit.name}</Heading>
+            <Text>{audit.findings}</Text>
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Box>
   );
 };
 

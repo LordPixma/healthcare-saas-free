@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import {
+  Box,
+  Button,
+  Heading,
+  List,
+  ListItem,
+  Text,
+} from '@chakra-ui/react';
 import { fetchIncidents } from '../api/incidentApi';
 
 interface Incident {
@@ -18,21 +26,25 @@ const IncidentList: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Incidents</h2>
-      <Link to="/incidents/new">Create New Incident</Link>
+    <Box>
+      <Heading size="lg" mb={4}>
+        Incidents
+      </Heading>
+      <Button as={Link} to="/incidents/new" colorScheme="brand" mb={4}>
+        Create New Incident
+      </Button>
       {incidents.length === 0 ? (
-        <p>No incidents found.</p>
+        <Text>No incidents found.</Text>
       ) : (
-        <ul>
+        <List spacing={2}>
           {incidents.map(inc => (
-            <li key={inc.id}>
-              <Link to={`/incidents/${inc.id}`}>{inc.title}</Link>
-            </li>
+            <ListItem key={inc.id}>
+              <Button as={Link} variant="link" colorScheme="brand" to={`/incidents/${inc.id}`}>{inc.title}</Button>
+            </ListItem>
           ))}
-        </ul>
+        </List>
       )}
-    </div>
+    </Box>
   );
 };
 
