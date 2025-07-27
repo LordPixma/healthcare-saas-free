@@ -74,3 +74,16 @@ To enable deployments, configure the following repository secrets:
 - `CLOUDFLARE_ACCOUNT_ID` – your Cloudflare account ID.
 
 Once the secrets are added, pushing to `main` will automatically run tests and deploy the worker.
+
+## Frontend Design
+
+The React frontend uses a simple theme built with [Chakra UI](https://chakra-ui.com/) and design tokens generated via **Magicpatterns**. Primary interface colors come from the Magicpatterns "Healthcare" palette:
+
+- **Brand Blue:** `#2c7be5`
+- **Accent Orange:** `#fca311`
+
+Headings and body text use the **Inter** font family which is loaded from Google Fonts. All pages share consistent spacing and alignment through Chakra components.
+
+### Customizing the Theme
+
+Theme settings live in `frontend/src/theme.ts`. Edit the color or font values there and restart the development server to see changes.

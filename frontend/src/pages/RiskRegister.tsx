@@ -1,4 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  List,
+  ListItem,
+  Stack,
+  Text,
+  Textarea,
+} from '@chakra-ui/react';
 
 interface Risk {
   id: string;
@@ -33,30 +46,30 @@ const RiskRegister: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Risk Register</h1>
+    <Box>
+      <Heading mb={4}>Risk Register</Heading>
       <form onSubmit={handleSubmit}>
-        <input
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-          placeholder="Title"
-        />
-        <textarea
-          value={description}
-          onChange={e => setDescription(e.target.value)}
-          placeholder="Description"
-        />
-        <button type="submit">Add Risk</button>
+        <Stack spacing={4} maxW="600px">
+          <FormControl isRequired>
+            <FormLabel htmlFor="title">Title</FormLabel>
+            <Input id="title" value={title} onChange={e => setTitle(e.target.value)} />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel htmlFor="description">Description</FormLabel>
+            <Textarea id="description" value={description} onChange={e => setDescription(e.target.value)} />
+          </FormControl>
+          <Button colorScheme="brand" type="submit">Add Risk</Button>
+        </Stack>
       </form>
-      <ul>
+      <List mt={8} spacing={4}>
         {risks.map(risk => (
-          <li key={risk.id}>
-            <strong>{risk.title}</strong>
-            <p>{risk.description}</p>
-          </li>
+          <ListItem key={risk.id} borderWidth="1px" borderRadius="md" p={4}>
+            <Heading size="sm" mb={2}>{risk.title}</Heading>
+            <Text>{risk.description}</Text>
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Box>
   );
 };
 
