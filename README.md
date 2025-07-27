@@ -13,6 +13,8 @@ Free serverless SaaS replicating Radar Healthcare's core modules (incident manag
 The `audit` folder contains a lightweight serverless module with endpoints for:
 
 * `POST /audit/forms` - create an audit form with custom questions.
+* `GET /audit/forms` - list audit forms.
+* `GET /audit/forms/{id}` - retrieve a single form.
 * `PUT /audit/forms/{id}` - edit an existing form.
 * `POST /audit/schedule` - schedule an audit.
 * `POST /audit/results` - submit audit results, including offline capture support.
@@ -35,6 +37,7 @@ This repository includes a simple risk register implemented with serverless func
 - `POST /risks` – create a new risk record
 - `PUT /risks/{riskId}` – update an existing risk record
 - `GET /risks/{riskId}` – retrieve a risk record
+- `GET /risks` – list all risk records
 
 ### Local Development
 
@@ -49,6 +52,17 @@ Unit tests can be run with:
 ```bash
 npm test
 ```
+
+### Running the React UI
+
+The client application lives in `frontend/`:
+
+```bash
+cd frontend
+npm install
+npm start
+```
+This starts a development server with pages for incidents, risks and audits.
 
 ## Development
 
