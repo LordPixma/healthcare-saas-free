@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createIncident, fetchIncident, updateIncident } from '../api/incidentApi';
+import Field from './Field';
 
 const IncidentForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -13,6 +14,7 @@ const IncidentForm: React.FC = () => {
     priority: '',
     date: '',
   });
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -26,6 +28,7 @@ const IncidentForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
     try {
       if (id) {
         await updateIncident(id, form);
@@ -35,37 +38,62 @@ const IncidentForm: React.FC = () => {
       navigate('/incidents');
     } catch (err) {
       console.error(err);
+    } finally {
+      setSubmitting(false);
     }
   };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Title:
-        <input name="title" value={form.title} onChange={handleChange} required />
-      </label>
-      <label>
-        Description:
-        <textarea name="description" value={form.description} onChange={handleChange} required />
-      </label>
-      <label>
-        Category:
-        <input name="category" value={form.category} onChange={handleChange} />
-      </label>
-      <label>
-        Priority:
-        <select name="priority" value={form.priority} onChange={handleChange}>
+  const fields = [
+    {
+      id: 'title',
+      label: 'Title',
+      element: (
+        <input id="title" name="title" value={form.title} onChange={handleChange} required />
+      )
+    },
+    {
+      id: 'description',
+      label: 'Description',
+      element: (
+        <textarea id="description" name="description" value={form.description} onChange={handleChange} required />
+      )
+    },
+    {
+      id: 'category',
+      label: 'Category',
+      element: (
+        <input id="category" name="category" value={form.category} onChange={handleChange} />
+      )
+    },
+    {
+      id: 'priority',
+      label: 'Priority',
+      element: (
+        <select id="priority" name="priority" value={form.priority} onChange={handleChange}>
           <option value="">Select</option>
           <option value="Low">Low</option>
           <option value="Normal">Normal</option>
           <option value="High">High</option>
         </select>
-      </label>
-      <label>
-        Date:
-        <input type="date" name="date" value={form.date} onChange={handleChange} />
-      </label>
-      <button type="submit">{id ? 'Update' : 'Create'}</button>
+      )
+    },
+    {
+      id: 'date',
+      label: 'Date',
+      element: (
+        <input id="date" type="date" name="date" value={form.date} onChange={handleChange} />
+      )
+    }
+  ];
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {fields.map(f => (
+        <Field key={f.id} id={f.id} label={f.label}>
+          {f.element}
+        </Field>
+      ))}
+      <button type="submit" disabled={submitting}>{id ? 'Update' : 'Create'}</button>
     </form>
   );
 };

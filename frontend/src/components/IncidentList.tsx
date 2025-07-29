@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+import { Link as ChakraLink } from '@chakra-ui/react';
 import { fetchIncidents } from '../api/incidentApi';
 
 interface Incident {
@@ -20,14 +21,14 @@ const IncidentList: React.FC = () => {
   return (
     <div>
       <h2>Incidents</h2>
-      <Link to="/incidents/new">Create New Incident</Link>
+      <ChakraLink as={RouterLink} to="/incidents/new">Create New Incident</ChakraLink>
       {incidents.length === 0 ? (
         <p>No incidents found.</p>
       ) : (
         <ul>
           {incidents.map(inc => (
             <li key={inc.id}>
-              <Link to={`/incidents/${inc.id}`}>{inc.title}</Link>
+              <ChakraLink as={RouterLink} to={`/incidents/${inc.id}`}>{inc.title}</ChakraLink>
             </li>
           ))}
         </ul>
