@@ -31,6 +31,7 @@ const AuditForm: React.FC = () => {
       } else {
         await createForm(payload);
       }
+      setForm({ name: '', questions: '' });
       navigate('/audits');
     } catch (err) {
       console.error(err);
