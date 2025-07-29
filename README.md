@@ -88,3 +88,11 @@ To enable deployments, configure the following repository secrets:
 - `CLOUDFLARE_ACCOUNT_ID` – your Cloudflare account ID.
 
 Once the secrets are added, pushing to `main` will automatically run tests and deploy the worker.
+
+### Cloudflare Pages
+
+The React frontend is deployed using [Cloudflare Pages](https://pages.cloudflare.com/). The
+`Deploy Frontend` workflow builds the app from `frontend/` and publishes the contents of
+`frontend/dist` whenever changes land on `main`. Configure the same `CLOUDFLARE_API_TOKEN`
+and `CLOUDFLARE_ACCOUNT_ID` secrets and create a Pages project named
+`healthcare-saas-frontend` in your account.
