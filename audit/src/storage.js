@@ -1,6 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const dataDir = path.join(__dirname, '..', 'data');
+// Ensure the data directory exists so tests and handlers can write files
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true });
+}
 const formsFile = path.join(dataDir, 'forms.json');
 const resultsFile = path.join(dataDir, 'results.json');
 const offlineFile = path.join(dataDir, 'offlineResults.json');
