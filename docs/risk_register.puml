@@ -1,0 +1,35 @@
+@startuml
+' UML diagram for risk_register module
+class RiskData {
+  +readRisks()
+  +writeRisks(risks)
+  +DB_FILE : string
+}
+
+class Auth {
+  +getUser(event)
+  +requireRole(event, role)
+}
+
+class CreateRiskHandler {
+  +createRisk(event)
+}
+class UpdateRiskHandler {
+  +updateRisk(event)
+}
+class GetRiskHandler {
+  +getRisk(event)
+}
+class ListRisksHandler {
+  +listRisks(event)
+}
+
+RiskData <.. CreateRiskHandler
+RiskData <.. UpdateRiskHandler
+RiskData <.. GetRiskHandler
+RiskData <.. ListRisksHandler
+Auth <.. CreateRiskHandler
+Auth <.. UpdateRiskHandler
+Auth <.. GetRiskHandler
+Auth <.. ListRisksHandler
+@enduml
