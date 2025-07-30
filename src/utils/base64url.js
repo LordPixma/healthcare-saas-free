@@ -1,4 +1,4 @@
-export function decodeBase64Url(input) {
+function decodeBase64Url(input) {
   if (typeof input !== 'string') {
     throw new TypeError('Expected a string');
   }
@@ -8,3 +8,5 @@ export function decodeBase64Url(input) {
   }
   return Buffer.from(normalized, 'base64');
 }
+
+module.exports = { decodeBase64Url };
