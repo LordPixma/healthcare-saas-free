@@ -6,7 +6,10 @@ function buildGetRisk({
     try {
       requireRole(event, 'staff');
     } catch (err) {
-      return { statusCode: err.message === 'Unauthorized' ? 401 : 403, body: err.message };
+      if (err.message === 'Unauthorized') {
+        return { statusCode: 401, body: 'Unauthorized' };
+      }
+      return { statusCode: 403, body: 'Forbidden' };
     }
     const riskId = event.pathParameters && event.pathParameters.riskId;
     if (!riskId) {
