@@ -1,7 +1,12 @@
 function extractBearerToken(request) {
   const authHeader = request.headers.get('Authorization') || '';
+  // Match "Bearer" followed by one or more spaces and then capture the rest, allowing for extra whitespace
   const match = authHeader.match(/^Bearer\s+(.+)$/i);
-  return match ? match[1] : null;
+  if (!match) return null;
+  const token = match[1].trim();
+  // Ensure token is non-empty and not just whitespace
+  if (!token) return null;
+  return token;
 }
 
 export default {
