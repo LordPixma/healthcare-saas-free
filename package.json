@@ -1,8 +1,9 @@
 {
   "name": "healthcare-saas-free",
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
-    "test": "node tests/test.js"
+    "test": "npm run test:node && npm run test:frontend",
+    "test:node": "node --test --test-concurrency=1 tests/riskHandlers.test.cjs && node tests/test.js",
+    "test:frontend": "npm --prefix frontend test"
   }
 }
