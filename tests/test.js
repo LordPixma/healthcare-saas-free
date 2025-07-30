@@ -1,5 +1,5 @@
-import assert from 'assert';
-import { decodeBase64Url } from '../src/utils/base64url.js';
+const assert = require('assert');
+const { decodeBase64Url } = require('../src/utils/base64url.js');
 
 assert.strictEqual(1 + 1, 2);
 
