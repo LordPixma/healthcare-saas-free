@@ -1,6 +1,12 @@
 const { readRisks } = require('../riskData');
+const { requireRole } = require('../auth');
 
 module.exports.getRisk = async (event) => {
+  try {
+    requireRole(event, 'staff');
+  } catch (err) {
+    return { statusCode: err.message === 'Unauthorized' ? 401 : 403, body: err.message };
+  }
   const riskId = event.pathParameters && event.pathParameters.riskId;
   if (!riskId) {
     return { statusCode: 400, body: 'Risk ID is required' };
