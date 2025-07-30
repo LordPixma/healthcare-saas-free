@@ -64,6 +64,16 @@ npm start
 ```
 This starts a development server with pages for incidents, risks and audits.
 
+### Authentication
+
+The frontend integrates with **Auth0** for user login. Provide `AUTH0_DOMAIN` and
+`AUTH0_CLIENT_ID` environment variables when running the UI. Routes are
+protected based on roles contained in the JWT token. Two roles are supported:
+`admin` and `staff`.
+
+During unit tests or local scripts (`NODE_ENV=test`) authentication checks are
+skipped.
+
 ## Development
 
 The project uses [Cloudflare Workers](https://workers.cloudflare.com/) for serverless functions. Source code lives in `src/` and tests reside in `tests/`.
