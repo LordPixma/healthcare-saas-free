@@ -5,25 +5,25 @@ provider:
   stage: dev
 functions:
   createRisk:
-    handler: handlers/createRisk.createRisk
+    handler: handlers/createRisk.cjs:createRisk
     events:
       - http:
           path: risks
           method: post
   updateRisk:
-    handler: handlers/updateRisk.updateRisk
+    handler: handlers/updateRisk.cjs:updateRisk
     events:
       - http:
           path: risks/{riskId}
           method: put
   getRisk:
-    handler: handlers/getRisk.getRisk
+    handler: handlers/getRisk.cjs:getRisk
     events:
       - http:
           path: risks/{riskId}
           method: get
   listRisks:
-    handler: handlers/listRisks.listRisks
+    handler: handlers/listRisks.cjs:listRisks
     events:
       - http:
           path: risks

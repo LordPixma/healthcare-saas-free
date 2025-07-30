@@ -1,8 +1,8 @@
 {
   "name": "healthcare-saas-free",
   "version": "1.0.0",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
-    "test": "node tests/test.js"
+    "test": "node tests/test.cjs && node tests/riskHandlers.test.cjs"
   }
 }

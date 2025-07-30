@@ -4,11 +4,13 @@ const path = require('path');
 const { test, beforeEach, afterEach } = require('node:test');
 const assert = require('node:assert');
 
-const { createRisk } = require('../handlers/createRisk');
-const { updateRisk } = require('../handlers/updateRisk');
-const { getRisk } = require('../handlers/getRisk');
+const { readRisks, writeRisks } = require('../riskData.cjs');
+const { buildCreateRisk } = require('../handlers/createRisk.cjs');
+const { buildUpdateRisk } = require('../handlers/updateRisk.cjs');
+const { buildGetRisk } = require('../handlers/getRisk.cjs');
 
-const token = 'e30=.eyJyb2xlcyI6WyJhZG1pbiIsInN0YWZmIl19.sig';
+const noopAuth = { requireRole: () => {} };
+let createRisk, updateRisk, getRisk;
 
 let tempDb;
 
@@ -17,6 +19,9 @@ beforeEach(() => {
   tempDb = path.join(dir, 'db.json');
   fs.writeFileSync(tempDb, '[]');
   process.env.RISK_DB = tempDb;
+  createRisk = buildCreateRisk({ readRisks, writeRisks, requireRole: noopAuth.requireRole });
+  updateRisk = buildUpdateRisk({ readRisks, writeRisks, requireRole: noopAuth.requireRole });
+  getRisk = buildGetRisk({ readRisks, requireRole: noopAuth.requireRole });
 });
 
 afterEach(() => {
@@ -26,9 +31,8 @@ afterEach(() => {
 });
 
 test('createRisk returns new risk', async () => {
-  const event = { 
-    body: JSON.stringify({ description: 'New risk', likelihood: 2, impact: 3, status: 'open' }),
-    headers: { Authorization: `Bearer ${token}` }
+  const event = {
+    body: JSON.stringify({ description: 'New risk', likelihood: 2, impact: 3, status: 'open' })
   };
   const res = await createRisk(event);
   assert.strictEqual(res.statusCode, 201);
@@ -38,16 +42,16 @@ test('createRisk returns new risk', async () => {
 });
 
 test('updateRisk modifies existing risk', async () => {
-  const createEvent = { 
+  const createEvent = {
     body: JSON.stringify({ description: 'Risk', likelihood: 1, impact: 1, status: 'open' }),
-    headers: { Authorization: `Bearer ${token}` }
+    
   };
   const created = await createRisk(createEvent);
   const risk = JSON.parse(created.body);
-  const updateEvent = { 
-    pathParameters: { riskId: risk.riskId }, 
+  const updateEvent = {
+    pathParameters: { riskId: risk.riskId },
     body: JSON.stringify({ status: 'closed' }),
-    headers: { Authorization: `Bearer ${token}` }
+    
   };
   const res = await updateRisk(updateEvent);
   assert.strictEqual(res.statusCode, 200);
@@ -56,15 +60,15 @@ test('updateRisk modifies existing risk', async () => {
 });
 
 test('getRisk retrieves a risk by id', async () => {
-  const createEvent = { 
+  const createEvent = {
     body: JSON.stringify({ description: 'Another', likelihood: 1, impact: 1, status: 'open' }),
-    headers: { Authorization: `Bearer ${token}` }
+    
   };
   const created = await createRisk(createEvent);
   const risk = JSON.parse(created.body);
-  const getEvent = { 
+  const getEvent = {
     pathParameters: { riskId: risk.riskId },
-    headers: { Authorization: `Bearer ${token}` }
+    
   };
   const res = await getRisk(getEvent);
   assert.strictEqual(res.statusCode, 200);

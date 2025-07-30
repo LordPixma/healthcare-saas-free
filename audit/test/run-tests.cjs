@@ -3,7 +3,7 @@ const path = require('path');
 
 (async () => {
   const testDir = __dirname;
-  const files = fs.readdirSync(testDir).filter(f => f.endsWith('.test.js'));
+  const files = fs.readdirSync(testDir).filter(f => f.endsWith('.test.cjs'));
   let failed = 0;
   for (const file of files) {
     const test = require(path.join(testDir, file));

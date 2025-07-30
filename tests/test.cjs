@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { decodeBase64Url } = require('../src/utils/base64url.js');
+const { decodeBase64Url } = require('../src/utils/base64url.cjs');
 
 assert.strictEqual(1 + 1, 2);
 

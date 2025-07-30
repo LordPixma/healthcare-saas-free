@@ -1,4 +1,4 @@
-const { getSchedule, saveSchedule } = require('./storage');
+const { getSchedule, saveSchedule } = require('./storage.cjs');
 
 exports.handler = async (event) => {
   const body = JSON.parse(event.body || '{}');

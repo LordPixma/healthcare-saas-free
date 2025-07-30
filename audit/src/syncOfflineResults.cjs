@@ -1,4 +1,4 @@
-const { syncOffline } = require('./storage');
+const { syncOffline } = require('./storage.cjs');
 
 exports.handler = async () => {
   syncOffline();

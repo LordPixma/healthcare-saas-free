@@ -1,7 +1,7 @@
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
-const storage = require('../src/storage');
+const storage = require('../src/storage.cjs');
 const dataDir = path.join(__dirname, '..', 'data');
 
 exports.run = async function() {

@@ -1,4 +1,4 @@
-const { getResults, saveResults, saveOffline } = require('./storage');
+const { getResults, saveResults, saveOffline } = require('./storage.cjs');
 
 exports.handler = async (event) => {
   const body = JSON.parse(event.body || '{}');

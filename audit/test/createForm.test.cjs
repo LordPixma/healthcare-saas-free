@@ -1,7 +1,7 @@
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
-const { handler } = require('../src/createForm');
+const { handler } = require('../src/createForm.cjs');
 const dataDir = path.join(__dirname, '..', 'data');
 
 exports.run = async function() {

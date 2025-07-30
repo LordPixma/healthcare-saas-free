@@ -1,4 +1,4 @@
-const { getForms } = require('./storage');
+const { getForms } = require('./storage.cjs');
 
 exports.handler = async () => {
   const forms = getForms();
