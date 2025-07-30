@@ -53,6 +53,12 @@ Unit tests can be run with:
 npm test
 ```
 
+### UML Diagram
+
+The relationships between the risk register handlers, authentication helper and
+data access utilities are documented in `docs/risk_register.puml`. Render this
+file with [PlantUML](https://plantuml.com/) to view the diagram.
+
 ### Running the React UI
 
 The client application lives in `frontend/`:
